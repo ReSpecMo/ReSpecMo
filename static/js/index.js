@@ -90,32 +90,64 @@ window.addEventListener('scroll', function() {
     }
 });
 
-// Video carousel autoplay when in view
+// // Video carousel autoplay when in view
+// function setupVideoCarouselAutoplay() {
+//     const carouselVideos = document.querySelectorAll('.results-carousel video');
+    
+//     if (carouselVideos.length === 0) return;
+    
+//     const observer = new IntersectionObserver((entries) => {
+//         entries.forEach(entry => {
+//             const video = entry.target;
+//             if (entry.isIntersecting) {
+//                 // Video is in view, play it
+//                 video.play().catch(e => {
+//                     // Autoplay failed, probably due to browser policy
+//                     console.log('Autoplay prevented:', e);
+//                 });
+//             } else {
+//                 // Video is out of view, pause it
+//                 video.pause();
+//             }
+//         });
+//     }, {
+//         threshold: 0.5 // Trigger when 50% of the video is visible
+//     });
+    
+//     carouselVideos.forEach(video => {
+//         observer.observe(video);
+//     });
+// }
+
 function setupVideoCarouselAutoplay() {
-    const carouselVideos = document.querySelectorAll('.results-carousel video');
-    
-    if (carouselVideos.length === 0) return;
-    
+    const videoGroups = document.querySelectorAll('.columns'); // 每一行视频
+
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
-            const video = entry.target;
+            const group = entry.target;
+            const videos = group.querySelectorAll('video');
+
             if (entry.isIntersecting) {
-                // Video is in view, play it
-                video.play().catch(e => {
-                    // Autoplay failed, probably due to browser policy
-                    console.log('Autoplay prevented:', e);
+                // 整组播放
+                videos.forEach(video => {
+                    video.currentTime = 0; // 可选：同步起点
+                    video.play().catch(e => {
+                        console.log('Autoplay prevented:', e);
+                    });
                 });
             } else {
-                // Video is out of view, pause it
-                video.pause();
+                // 整组暂停
+                videos.forEach(video => {
+                    video.pause();
+                });
             }
         });
     }, {
-        threshold: 0.5 // Trigger when 50% of the video is visible
+        threshold: 0.5
     });
-    
-    carouselVideos.forEach(video => {
-        observer.observe(video);
+
+    videoGroups.forEach(group => {
+        observer.observe(group);
     });
 }
 
