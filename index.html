@@ -78,8 +78,8 @@
   <title>ReSpecMo</title>
   
   <!-- Favicon and App Icons -->
-  <link rel="icon" type="image/x-icon" href="static/images/piano.png">
-  <link rel="apple-touch-icon" href="static/images/piano.png">
+  <link rel="icon" type="image/x-icon" href="static/images/piano.ico">
+  <link rel="apple-touch-icon" href="static/images/piano.ico">
   
   <!-- Critical CSS - Load synchronously -->
   <link rel="stylesheet" href="static/css/bulma.min.css">
@@ -477,7 +477,10 @@ Extensive experiments demonstrate that ReSpecMo consistently outperforms existin
     <div class="container">
       <!-- Spectrogram-to-Motion 区域 -->
       <h2 class="title is-3">Retrieval Results</h2>
-      <h4 class="title is-6">The blue bounding box highlights the successful retrieval of ground-truth.</h4>
+      <h4 class="title is-6">
+        The proposed FSMR retrieves ground-truth motion sequences corresponding to the spectrogram prompt within the top-3 results. 
+        The blue box indicates successful retrieval.
+      </h4>
       <div class="container">
         <h3 class="title is-4">spectrogram-to-motion</h3>
 
